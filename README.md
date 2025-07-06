@@ -1,4 +1,5 @@
-# bookkeeper is a cli tool, which can add list and so on to record your cost
+# bookkeeper 
+bookkeeper is a cli tool, which can add list and so on to record your cost
 
 ## usage
 `python main.py -h`
