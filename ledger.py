@@ -24,12 +24,6 @@ def remove(it: str, date: str):
 		 	(each.get('item') == it and each.get('date') == date)]
 	
 	storage.writeJson(filepath, data)
-
-def list():
-	data = storage.readJson(filepath)
-	for each in data:
-		print(f"[date]:{each['date']}\n[item]:{each['item']}\
-			  \n[amount]:{each['amount']}\n[category]:{each['category']}")
 				
 	
 def update(it: str, date: str, args_dict: dict):
@@ -58,3 +52,6 @@ def table():
 	data = storage.readJson(filepath)
 	utils.creTable(data)
 	
+
+def clean():
+	storage.writeJson(filepath, [])

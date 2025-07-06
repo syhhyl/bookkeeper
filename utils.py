@@ -1,11 +1,8 @@
-'''
-check_date()
-date:YYYY-MM-DD
-'''
 from datetime import datetime
 import os
 from rich.table import Table
 from rich.console import Console
+
 def check_date(date: str) -> bool:
 	try:
 		if not date: date = ''
