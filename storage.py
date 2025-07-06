@@ -7,9 +7,9 @@ def readJson(filepath: str) -> list:
 		with open(filepath, 'r') as f:
 			try:
 				data = json.load(f)
-				# print("load config success")
 			except json.JSONDecodeError:
-				print("")
+				# print("")
+				pass
 	return data	
 		
 

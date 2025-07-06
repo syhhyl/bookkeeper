@@ -1,11 +1,6 @@
 import argparse
-from ledger import add, remove, list, update, show
+from ledger import *
 import utils
-# parser = argparse.ArgumentParser()
-# parser.add_argument("filename", type=str, help="a filepath")
-# parser.add_argument("date", help="the day of work", type=int)
-# args = parser.parse_args()
-# print(args.filename, args.date)
 
 def argParser() -> dict:
 	parser = argparse.ArgumentParser()
@@ -16,9 +11,6 @@ def argParser() -> dict:
 	parser.add_argument("--category", type=str, help="category")
 	parser.add_argument("--uitem", type=str, help="use with update")
 	parser.add_argument("--udate", type=str, help="use with date")
-	
-	# parser.add_argument("--by", type=str, help="use for stats")
-	# parser.add_argument("--to", type=str, help="use for export")
 
 	args = vars(parser.parse_args())
 	for pair in args:
@@ -40,7 +32,8 @@ def main():
 			update(args_dict['uitem'], args_dict['udate'], args_dict)
 		case 'show':
 			show()	
-		
+		case 'table':
+			table()
 
 if __name__ == "__main__":
 	main()

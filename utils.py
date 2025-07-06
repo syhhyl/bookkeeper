@@ -4,28 +4,15 @@ date:YYYY-MM-DD
 '''
 from datetime import datetime
 import os
-import json
+from rich.table import Table
+from rich.console import Console
 def check_date(date: str) -> bool:
-	# year, month, day = date.split('-') 
-	# # print(datetime.now().year)
-	# # print(datetime.now().month)
-	# # print(datetime.now().day)
-	# print(year, month, day)
-	# now = datetime.now()
-	# if int(year) > now.year:
-	# 	return False 
-	# elif int(month) > now.month:
-	# 	return False
-	# elif int(day) > now.day:
-	# 	return False	
-	# return True
-	
 	try:
+		if not date: date = ''
 		input_date = datetime.strptime(date, '%Y-%m-%d')
 	except ValueError:
 		return False
 	return input_date <= datetime.now()
-# check_date('2005-09-26')
 
 def isExistFile(filepath: str):
 	return os.path.exists(filepath)
@@ -40,24 +27,39 @@ def getMaxMin(data: list) -> tuple:
 			max = each['amount']
 		if each['amount'] < min:
 			min = each['amount']
-
 	return min, max
 				
 def calc_show(curr: float, min: float, max: float):
-	base = max - min
+	base = (max - min) * 10
 	if base == 0:
 		per = 1
 	else:
-		per = curr / (base * 2)
-	bar_len = 100
+		per = curr / base
+	bar_len = 60
 	filled_len = int(per * bar_len)
+	# print(f"filled_len:{filled_len}")
 	if filled_len < 1: filled_len = 1
 	bar = '█' * filled_len
 	print(bar)
 
-	
 
-	
-# calc_show(290, 780)
-# calc_show(340, 780)
 
+def creTable(data: list):
+	console = Console()
+	table = Table(show_header=True, header_style="bold magenta")
+	table.add_column("date", style="dim")
+	table.add_column("item", style="dim")
+	table.add_column("amount", style="dim")
+	table.add_column("category", style="dim")
+
+	for each in data:
+		table.add_row(
+			each['date'],
+			each['item'],
+			str(each['amount']),
+			each['category']
+		)
+	console.print(table)
+	
+	
+		
